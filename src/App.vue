@@ -1,22 +1,25 @@
 <template>
   <div id="app">
+   <HeaderElem/>gi
+      <router-view/>
   </div>
 </template>
 
 <script>
+import HeaderElem from "@/components/headerComponent";
+
 
 export default {
   name: 'App',
+  components:{
+    HeaderElem,
+  },
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0 5%;
 }
+
 </style>
