@@ -18,6 +18,13 @@ const routes = [
             return import('../views/SignIn.vue')
         }
     },
+    {
+        path: '/signup',
+        name: 'Home',
+        component: function () {
+            return import('../views/SingUp.vue')
+        }
+    },
   ]
 const router = new VueRouter({
     mode: 'history',
