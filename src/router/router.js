@@ -25,6 +25,7 @@ const routes = [
             return import('../views/SingUp.vue')
         }
     },
+
   ]
 const router = new VueRouter({
     mode: 'history',
