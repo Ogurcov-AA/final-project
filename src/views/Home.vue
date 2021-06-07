@@ -3,14 +3,13 @@
   <div class="tab">
     <div class="newsTab">
       <news/>
-      <news/>
     </div>
     <div class="randomNews">
     <randomNews/>
     </div>
   </div>
     <div class="nextPages">
-      wad
+      <pagination/>
     </div>
   </div>
 </template>
@@ -18,12 +17,14 @@
 <script>
 import news from "@/components/news"
 import randomNews from "@/components/randomNews";
+import pagination from "@/components/pagination";
 
 export default {
   name: "Home",
   components: {
     news,
-    randomNews
+    randomNews,
+    pagination
   },
 }
 </script>

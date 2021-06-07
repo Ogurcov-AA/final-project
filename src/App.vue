@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <HeaderElem/>gi
+   <HeaderElem/>
       <router-view/>
   </div>
 </template>

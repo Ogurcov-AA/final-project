@@ -1,0 +1,19 @@
+[33mcommit cfecf1d4fd5dbbf7adf0586d5d4a57ea3ccfc858[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Sasha Ogurtsov <sanekLLIypa@yandex.ru>
+Date:   Mon Jun 7 13:45:28 2021 +0300
+
+    feat: add home page
+    
+    \n- added new components 'news'\n- added router
+
+[33mcommit be66e4ba907f082e429bf57e96500687c41d0ad8[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Sasha Ogurtsov <sanekLLIypa@yandex.ru>
+Date:   Mon Jun 7 11:01:40 2021 +0300
+
+    ''
+
+[33mcommit 29495e18516b2717d59892c196b9a4149c8a2da6[m
+Author: Sasha Ogurtsov <sanekLLIypa@yandex.ru>
+Date:   Mon Jun 7 10:57:28 2021 +0300
+
+    init
