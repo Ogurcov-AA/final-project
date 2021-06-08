@@ -1,22 +1,30 @@
 <template>
   <div class="header">
     <div class="home">
-      <img src="https://img.icons8.com/ios/452/home-page.png" alt="" class="home-icon">
+      <img src="https://img.icons8.com/ios/452/home-page.png" alt="" class="home-icon" @click="$router.push('/').catch(err => {})">
     </div>
     <div class="search">
       <input type="text" class="search-field">
       <img src="https://image.flaticon.com/icons/svg/49/49116.svg" alt="" class="search-icon">
       <input type="button" class="search-button" value="Find">
     </div>
-    <div class="auth">
-      <input type="button" value="Sign In/Sign Up" class="authButton">
+    <div class="auth" v-if="$store.getters.getName===''">
+      <input type="button" value="Sign In/Sign Up" @click="$router.push('login').catch(err=>{})" class="authButton">
+    </div>
+    <div class="auth" v-else>
+      <p class="login-text">{{ $store.getters.getName }}</p>
+      <input type="button" value="Log Out" @click="logout()" class="authButton">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    logout() {
+    this.$store.dispatch('logout')
+    }
+  }
 }
 </script>
 
@@ -69,6 +77,12 @@ export default {
   background: transparent;
   height: 45px;
   outline: none;
+}
+
+.login-text {
+  display: inline-block;
+  margin-right: 40px;
+  font-size: 26px;
 }
 
 

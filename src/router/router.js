@@ -13,14 +13,21 @@ const routes = [
     },
     {
         path: '/login',
-        name: 'Home',
+        name: 'signin',
         component: function () {
             return import('../views/SignIn.vue')
         }
     },
     {
+        path: '/news/:id',
+        name: 'news',
+        component: function () {
+            return import('../views/AboutNews.vue')
+        }
+    },
+    {
         path: '/signup',
-        name: 'Home',
+        name: 'signup',
         component: function () {
             return import('../views/SingUp.vue')
         }
