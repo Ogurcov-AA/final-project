@@ -1,17 +1,19 @@
 <template>
   <div class="news">
-    <img src="https://s1.1zoom.ru/big0/52/Love_Sunrises_and_sunsets_Fingers_Hands_Heart_Sun_532758_1280x897.jpg" alt=""
+    <img v-bind:src="url" alt=""
          class="news-icon">
     <div class="news-info">
-      <h4>Amazon reportedly has an Alexa-powered AirPods competitor in the works</h4>
-      <p>Apple's new AirPods give you hands-free access to Siri</p>
+      <h4>{{title}}</h4>
+      <p>{{description}}</p>
     </div>
+      <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png" alt="" class="delete-icon">
   </div>
 </template>
 
 <script>
 export default {
-  name: "news"
+  name: "news",
+  props: ["title","description","url"]
 }
 </script>
 
@@ -29,4 +31,17 @@ export default {
 .news-info{
   flex-direction: column;
 }
+.delete-icon{
+  height: 5%;
+  width: 5%;
+  margin: 3% 3% 0 0;
+}
+
+.delete-icon:hover{
+  opacity: 0.6;
+}
+.delete-icon:active{
+  width: 4%;
+  height: 4%;
+  }
 </style>

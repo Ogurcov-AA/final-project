@@ -30,6 +30,8 @@ const user = {
         getName: state => state.name,
         getSurName: state => state.surname,
         getEmail: state => state.email,
+        isAdmin: state => state.email === 'admin@root',
+        isAuth: state => state.name !== ''
     }
 }
 

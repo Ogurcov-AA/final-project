@@ -32,6 +32,13 @@ const routes = [
             return import('../views/SingUp.vue')
         }
     },
+    {
+        path: '/createNews',
+        name: 'new news',
+        component: function () {
+            return import('../views/addNews.vue')
+        }
+    },
 
   ]
 const router = new VueRouter({
