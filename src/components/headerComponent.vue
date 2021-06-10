@@ -9,7 +9,7 @@
       <input type="button" class="search-button" value="Find">
     </div>
     <div class="auth" v-if="$store.getters.getName===''">
-      <input type="button" value="Sign In/Sign Up" @click="$router.push('login').catch(err=>{})" class="authButton">
+      <input type="button" value="Sign In/Sign Up" @click="$router.push('/login').catch(err=>{})" class="authButton">
     </div>
     <div class="auth" v-else>
       <p class="login-text">{{ $store.getters.getName }}</p>
