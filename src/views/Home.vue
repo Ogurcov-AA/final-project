@@ -2,7 +2,7 @@
   <div class="body" v-if="isFetching">
     <div class="tab">
       <div class="newsTab">
-        <div v-for="item in newsList" :key="item.url">
+        <div v-for="item in getPage  " :key="item.url">
           <news v-bind:title="item.title"
                 v-bind:description="item.description"
                 v-bind:url="item.urlToImage"
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="randomNews" v-if="!$store.getters.isAdmin">
-        <randomNews/>
+        <randomNews />
       </div>
       <div class="addNews" v-else>
         <img src="https://img.icons8.com/pastel-glyph/2x/plus.png" alt="" class="addNews-icon"
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="nextPages">
-      <pagination/>
+      <pagination v-bind:count="this.newsList.length/this.countNewsInPage"/>
     </div>
   </div>
 </template>
@@ -38,18 +38,43 @@ export default {
   data() {
     return {
       newsList: '',
-      isFetching: false
+      isFetching: false,
+      countNewsInPage: 15,
+      newsPage: '',
+      pagination: this.$route.params.page,
     }
   },
   created() {
     this.getList()
   },
+  beforeRouteUpdate(to, from, next){
+    console.log(this.pagination)
+    this.pagination = to.params.page
+    next()
+  },
+  computed: {
+    getPage() {
+      if (this.newsList.length < 15) {
+        return this.newsList
+      }
+      else {
+        if(this.pagination === 1)
+        return this.newsList.slice(0,this.countNewsInPage)
+        else {
+          return this.newsList.slice((this.pagination-1)*this.countNewsInPage+1,this.pagination*this.countNewsInPage)
+        }
+      }
+    }
+  },
   methods: {
     getList() {
       this.$store.dispatch('getNews')
-          .then(resp => {this.newsList = resp
-            this.isFetching = true})
-    }
+          .then(resp => {
+            this.newsList = resp
+            this.newsPage = this.getPage
+            this.isFetching = true
+          })
+    },
   }
 }
 </script>

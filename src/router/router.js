@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/',
+        path: '/:page',
         name: 'Home',
         component: function () {
             return import('../views/Home.vue')
@@ -39,7 +39,7 @@ const routes = [
             return import('../views/addNews.vue')
         }
     },
-
+    { path: '/', redirect: '/1' }
   ]
 const router = new VueRouter({
     mode: 'history',

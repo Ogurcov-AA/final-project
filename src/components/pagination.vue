@@ -1,23 +1,95 @@
 <template>
-  <div>
-    <ol>
-      <li/>
-      <hr class="line">
-      <li/>
-      <hr class="line">
-      <li/>
-      <hr class="line">
-      <li/>
-      <hr class="line">
-      <li/>
+  <div style="margin-bottom: 10%">
 
+    <ol id="list">
+      <button @click="prePage()"> ◄</button>
+      <li/>
+      <li v-for="item in PagePerLine" :key="item">
+        <hr class="line">
+      </li>
+      <button @click="nextPage()"> ►</button>
     </ol>
   </div>
 </template>
 
 <script>
 export default {
-  name: "pagination"
+  name: "pagination",
+  props: ["count"],
+  data() {
+    return {
+      currentPage: this.$route.params.page,
+      countPage: Math.ceil(this.count - 1),
+      numPerLine: 5
+    }
+  },
+  mounted() {
+    this.chosenPage()
+  },
+  computed: {
+    PagePerLine() {
+      if (this.countPage < 5)
+        return this.countPage
+      else return 4
+    },
+  },
+
+  methods: {
+    changePage(newPage) {
+      let elem = document.querySelectorAll('li')
+      if (this.countPage > 5) {
+        if (this.currentPage <= 3 && newPage <= 3) {
+          elem[this.currentPage - 1].classList.remove('li-chosen')
+          elem[newPage - 1].classList.add('li-chosen')
+        }
+        if (Number(this.countPage) + 1 - this.currentPage < 3 && Number(this.countPage) + 1 - newPage < 3) {
+          elem[4 - (Number(this.countPage) + 1 - this.currentPage)].classList.remove('li-chosen')
+          elem[4 - (Number(this.countPage) + 1 - newPage)].classList.add('li-chosen')
+        }
+      } else {
+        elem[this.currentPage - 1].classList.remove('li-chosen')
+        elem[newPage - 1].classList.add('li-chosen')
+      }
+      this.currentPage = newPage
+      this.$router.push("/" + newPage).catch(err => {
+        console.log(err)
+      })
+    },
+    chosenPage() {
+      let elem = document.querySelectorAll('li')
+      console.log(this)
+      if (this.currentPage > 3) {
+        let el = document.getElementById("list")
+        if (Number(this.countPage) + 1 - this.currentPage <= 2) {
+          el.style.counterIncrement = `myCounter ${this.currentPage - 5}`
+          elem[4 - (Number(this.countPage) + 1 - this.currentPage)].classList.add('li-chosen')
+        } else {
+
+          el.style.counterIncrement = `myCounter ${this.currentPage - 3}`
+          elem[2].classList.add('li-chosen')
+        }
+      } else elem[this.currentPage - 1].classList.add('li-chosen')
+      elem[this.currentPage - 1].classList.add('li-chosen')
+    },
+    prePage() {
+      if (Number(this.currentPage) !== 1) {
+        let el = document.getElementById("list")
+        if (Number(this.currentPage) > 3 && Number(this.currentPage) < this.countPage) {
+          el.style.counterIncrement = `myCounter ${this.currentPage - 4}`
+        }
+        this.changePage(this.currentPage - 1)
+      }
+    },
+    nextPage() {
+      if (Number(this.currentPage - 1) !== this.countPage) {
+        if (Number(this.currentPage) >= 3 && Number(this.currentPage) < this.countPage - 1) {
+          let el = document.getElementById("list")
+          el.style.counterIncrement = `myCounter ${this.currentPage - 2}`
+        }
+        this.changePage(Number(this.currentPage) + 1)
+      }
+    }
+  }
 }
 </script>
 
@@ -26,7 +98,7 @@ export default {
 ol {
   counter-reset: myCounter;
   display: inline;
-
+  margin-bottom: 10%;
 }
 
 li {
@@ -51,6 +123,10 @@ li:hover {
   color: red;
 }
 
+.li-chosen {
+  opacity: 0.6;
+}
+
 .line {
   display: inline-table;
   content: "";
@@ -58,8 +134,20 @@ li:hover {
   border-top: 1px solid black;
   width: 10px;
   height: 0;
+}
 
+ol button {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 1px solid black;
+  outline: none;
+}
 
+ol button:hover {
+  opacity: 0.6;
+  color: red;
 }
 
 </style>
