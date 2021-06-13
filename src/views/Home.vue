@@ -2,7 +2,7 @@
   <div class="body" v-if="isFetching">
     <div class="tab">
       <div class="newsTab">
-        <div v-for="item in getPage  " :key="item.url">
+        <div v-for="item in getPage  " :key="item.source.id">
           <news v-bind:title="item.title"
                 v-bind:description="item.description"
                 v-bind:url="item.urlToImage"

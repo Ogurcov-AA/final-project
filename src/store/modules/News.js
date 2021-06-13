@@ -6,22 +6,30 @@ const news = {
         searchNewsList: ''
     },
     mutations: {
-        setNewsList(state,data){
+        setNewsList(state, data) {
             state.newsList = data
         }
     },
     actions: {
         getNews({commit}) {
-           return new Promise((resolve) => axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=d072f63afae64577a8b7493df55cf7c3')
-                .then(response => {console.log(response.data.articles)
-                commit('setNewsList', response.data.articles)
-                    resolve(response.data.articles)
-                }))
+            return new Promise((resolve) => axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=d072f63afae64577a8b7493df55cf7c3')
+                .then(response => {
+                    let list = response.data.articles
+                    Array.from(list).forEach(item => {
+                        let i = 0
+                        item.source.id = i
+                        i++
+                })
+            console.log(list)
+            commit('setNewsList', list)
+            resolve(list)
         }
-    },
-    getters: {
-        getNewsList: state => state.newsList
-    }
+))
+}
+},
+getters: {
+    getNewsList: state => state.newsList
+}
 }
 
 export default news
