@@ -3,6 +3,7 @@
     <div v-if="sortedList.length===0">
       <h2 class="error-search">No news for this search</h2>
     </div>
+    <input type="button" value="reset" class="reset-search" @click="$router.push('/')">
     <div v-for="item in sortedList" :key="item.author">
       <news v-bind:title="item.title"
             v-bind:description="item.description"
@@ -72,5 +73,15 @@ export default {
   text-align: center;
   margin-top: 15%;
   opacity: 0.8;
+}
+.reset-search{
+  margin: 5%;
+  width: 90%;
+  height: 50px;
+  background: transparent;
+  outline: none;
+}
+  input[type='button']:hover{
+  background: #d9d7d7;
 }
 </style>
