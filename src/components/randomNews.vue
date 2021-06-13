@@ -2,7 +2,10 @@
   <div>
     <news v-bind:title="randNews.title"
           v-bind:description="randNews.description"
-          v-bind:url="randNews.urlToImage"/>
+          v-bind:url="randNews.urlToImage"
+          v-bind:author="authorNews(randNews)"
+          v-bind:publishedAt="formatDate(randNews.publishedAt)"
+          @click.native="$router.push({name: 'news', params: {id: randNews.source.name}})"/>
   </div>
 </template>
 
@@ -41,6 +44,12 @@ export default {
     },
     getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    authorNews(news){
+      return news.author?news.author:news.source.name
+    },
+    formatDate(date){
+      return new Date(date).toLocaleDateString()
     }
   }
 }

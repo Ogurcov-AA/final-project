@@ -5,6 +5,7 @@
     <div class="news-info">
       <h4>{{title}}</h4>
       <p>{{description}}</p>
+      <h5><span>{{author}}</span>{{publishedAt}}</h5>
     </div>
       <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png" alt="" class="delete-icon">
   </div>
@@ -13,7 +14,7 @@
 <script>
 export default {
   name: "news",
-  props: ["title","description","url"]
+  props: ["title","description","url","author","publishedAt"]
 }
 </script>
 
@@ -44,4 +45,10 @@ export default {
   width: 4%;
   height: 4%;
   }
+.news-info h5{
+margin-top: 15%;
+}
+.news-info h5 span{
+ margin-right: 15%;
+}
 </style>

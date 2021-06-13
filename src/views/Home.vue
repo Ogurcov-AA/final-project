@@ -6,6 +6,8 @@
           <news v-bind:title="item.title"
                 v-bind:description="item.description"
                 v-bind:url="item.urlToImage"
+                v-bind:author="authorNews(item)"
+                v-bind:publishedAt="formatDate(item.publishedAt)"
                 @click.native="$router.push({name: 'news', params: {id: item.source.name}})"/>
         </div>
       </div>
@@ -64,7 +66,7 @@ export default {
           return this.newsList.slice((this.pagination-1)*this.countNewsInPage+1,this.pagination*this.countNewsInPage)
         }
       }
-    }
+    },
   },
   methods: {
     getList() {
@@ -75,6 +77,12 @@ export default {
             this.isFetching = true
           })
     },
+    authorNews(news){
+      return news.author?news.author:news.source.name
+    },
+    formatDate(date){
+      return new Date(date).toLocaleDateString()
+    }
   }
 }
 </script>
