@@ -1,5 +1,8 @@
 <template>
   <div v-if="isFetching">
+    <div v-if="sortedList.length===0">
+      <h2 class="error-search">No news for this search</h2>
+    </div>
     <div v-for="item in sortedList" :key="item.author">
       <news v-bind:title="item.title"
             v-bind:description="item.description"
@@ -21,11 +24,12 @@ export default {
       isFetching: false,
       newsList: [],
       sortedList: [],
+      countNewsInPage: 15,
       searchString: this.$route.params.tittle
     }
   },
   components: {
-    news
+    news,
   },
   beforeRouteUpdate(to, from, next) {
     this.searchString = to.params.tittle
@@ -64,5 +68,9 @@ export default {
 </script>
 
 <style scoped>
-
+.error-search{
+  text-align: center;
+  margin-top: 15%;
+  opacity: 0.8;
+}
 </style>
