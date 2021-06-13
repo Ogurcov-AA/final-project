@@ -4,9 +4,9 @@
       <img src="https://img.icons8.com/ios/452/home-page.png" alt="" class="home-icon" @click="$router.push('/').catch(err => {})">
     </div>
     <div class="search">
-      <input type="text" class="search-field">
+      <input type="text" class="search-field" v-model="searchString">
       <img src="https://image.flaticon.com/icons/svg/49/49116.svg" alt="" class="search-icon">
-      <input type="button" class="search-button" value="Find">
+      <input type="button" class="search-button" value="Find" @click="$router.push('/search/' + searchString).catch(err => {$router.replace('/search/' + searchString)})">
     </div>
     <div class="auth" v-if="$store.getters.getName===''">
       <input type="button" value="Sign In/Sign Up" @click="$router.push('/login').catch(err=>{})" class="authButton">
@@ -20,6 +20,11 @@
 
 <script>
 export default {
+  data(){
+    return{
+      searchString: ''
+    }
+  },
   methods: {
     logout() {
     this.$store.dispatch('logout')

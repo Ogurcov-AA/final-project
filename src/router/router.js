@@ -12,6 +12,13 @@ const routes = [
         }
     },
     {
+        path: '/search/:tittle',
+        name: 'Search',
+        component: function () {
+            return import('../views/SearchNews.vue')
+        }
+    },
+    {
         path: '/login',
         name: 'signin',
         component: function () {

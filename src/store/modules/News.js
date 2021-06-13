@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const news = {
     state: {
-        newsList: ''
+        newsList: '',
+        searchNewsList: ''
     },
     mutations: {
         setNewsList(state,data){
