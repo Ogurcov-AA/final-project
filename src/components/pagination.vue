@@ -1,6 +1,5 @@
 <template>
   <div style="margin-bottom: 10%">
-
     <ol id="list">
       <button @click="prePage()"> ◄</button>
       <li/>
@@ -19,7 +18,7 @@ export default {
   data() {
     return {
       currentPage: Number(this.$route.params.page),
-      countPage: Number(Math.ceil(this.count - 1)),
+      countPage: this.roundingNum,
       numPerLine: 5
     }
   },
@@ -28,10 +27,15 @@ export default {
   },
   computed: {
     PagePerLine() {
-      if (this.countPage < 5)
-        return this.countPage
-      else return 4
+      if (this.roundingNum < 5) {
+        return this.roundingNum
+      } else return 4
     },
+    roundingNum() {
+      if (this.count > 0) {
+        return Number(Math.ceil(this.count - 1))
+      } else return 0
+    }
   },
 
   methods: {
