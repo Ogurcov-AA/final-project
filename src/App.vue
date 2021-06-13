@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-   <HeaderElem/>
+    <HeaderElem/>
+    <keep-alive>
       <router-view/>
+    </keep-alive>
   </div>
 </template>
 
@@ -11,7 +13,7 @@ import HeaderElem from "@/components/headerComponent";
 
 export default {
   name: 'App',
-  components:{
+  components: {
     HeaderElem,
   },
 }

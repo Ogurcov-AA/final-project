@@ -8,7 +8,8 @@
                 v-bind:url="item.urlToImage"
                 v-bind:author="authorNews(item)"
                 v-bind:publishedAt="formatDate(item.publishedAt)"
-                @click.native="$router.push({name: 'news', params: {id: item.source.name}})"/>
+                v-bind:id="item.source.id"
+                @click.native="$router.push({name: 'news', params: {id: item.source.id}})"/>
         </div>
       </div>
       <div class="randomNews" v-if="!$store.getters.isAdmin">
@@ -20,7 +21,7 @@
       </div>
     </div>
     <div class="nextPages">
-      <pagination v-bind:count="this.newsList.length/this.countNewsInPage"/>
+      <pagination v-bind:count="countPage"/>
     </div>
   </div>
 </template>
@@ -39,7 +40,7 @@ export default {
   },
   data() {
     return {
-      newsList: '',
+      newsList: this.$store.getters.getNewsList,
       isFetching: false,
       countNewsInPage: 15,
       newsPage: '',
@@ -67,6 +68,9 @@ export default {
         }
       }
     },
+    countPage(){
+      return this.newsList.length/this.countNewsInPage
+    }
   },
   methods: {
     getList() {
@@ -82,7 +86,7 @@ export default {
     },
     formatDate(date){
       return new Date(date).toLocaleDateString()
-    }
+    },
   }
 }
 </script>

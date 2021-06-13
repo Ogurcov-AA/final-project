@@ -3,18 +3,25 @@
     <img v-bind:src="url" alt=""
          class="news-icon">
     <div class="news-info">
-      <h4>{{title}}</h4>
-      <p>{{description}}</p>
-      <h5><span>{{author}}</span>{{publishedAt}}</h5>
+      <h4>{{ title }}</h4>
+      <p>{{ description }}</p>
+      <h5><span>{{ author }}</span>{{ publishedAt }}</h5>
     </div>
-      <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png" alt="" class="delete-icon">
+    <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png"
+         alt="" class="delete-icon" @click="deleteNews" >
   </div>
 </template>
 
 <script>
 export default {
   name: "news",
-  props: ["title","description","url","author","publishedAt"]
+  props: ["title", "description", "url", "author", "publishedAt", "id"],
+  methods: {
+    deleteNews() {
+      event.stopPropagation()
+      this.$store.dispatch('removeNews', this.id).then(() => console.log(this.$store.getters.getNewsList))
+    }
+  }
 }
 </script>
 
@@ -29,26 +36,31 @@ export default {
   width: 50%;
   margin: 2%;
 }
-.news-info{
+
+.news-info {
   flex-direction: column;
 }
-.delete-icon{
+
+.delete-icon {
   height: 5%;
   width: 5%;
   margin: 3% 3% 0 0;
 }
 
-.delete-icon:hover{
+.delete-icon:hover {
   opacity: 0.6;
 }
-.delete-icon:active{
+
+.delete-icon:active {
   width: 4%;
   height: 4%;
-  }
-.news-info h5{
-margin-top: 15%;
 }
-.news-info h5 span{
- margin-right: 15%;
+
+.news-info h5 {
+  margin-top: 15%;
+}
+
+.news-info h5 span {
+  margin-right: 15%;
 }
 </style>
