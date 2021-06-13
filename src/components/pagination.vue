@@ -18,8 +18,8 @@ export default {
   props: ["count"],
   data() {
     return {
-      currentPage: this.$route.params.page,
-      countPage: Math.ceil(this.count - 1),
+      currentPage: Number(this.$route.params.page),
+      countPage: Number(Math.ceil(this.count - 1)),
       numPerLine: 5
     }
   },
@@ -42,9 +42,9 @@ export default {
           elem[this.currentPage - 1].classList.remove('li-chosen')
           elem[newPage - 1].classList.add('li-chosen')
         }
-        if (Number(this.countPage) + 1 - this.currentPage < 3 && Number(this.countPage) + 1 - newPage < 3) {
-          elem[4 - (Number(this.countPage) + 1 - this.currentPage)].classList.remove('li-chosen')
-          elem[4 - (Number(this.countPage) + 1 - newPage)].classList.add('li-chosen')
+        if (this.countPage + 1 - this.currentPage < 3 && this.countPag + 1 - newPage < 3) {
+          elem[4 - this.countPage + 1 - this.currentPage].classList.remove('li-chosen')
+          elem[4 - (this.countPage + 1 - newPage)].classList.add('li-chosen')
         }
       } else {
         elem[this.currentPage - 1].classList.remove('li-chosen')
@@ -60,9 +60,9 @@ export default {
       console.log(this)
       if (this.currentPage > 3) {
         let el = document.getElementById("list")
-        if (Number(this.countPage) + 1 - this.currentPage <= 2) {
+        if (this.countPage + 1 - this.currentPage <= 2) {
           el.style.counterIncrement = `myCounter ${this.currentPage - 5}`
-          elem[4 - (Number(this.countPage) + 1 - this.currentPage)].classList.add('li-chosen')
+          elem[4 - (this.countPage + 1 - this.currentPage)].classList.add('li-chosen')
         } else {
 
           el.style.counterIncrement = `myCounter ${this.currentPage - 3}`
@@ -72,21 +72,21 @@ export default {
       elem[this.currentPage - 1].classList.add('li-chosen')
     },
     prePage() {
-      if (Number(this.currentPage) !== 1) {
+      if (this.currentPage !== 1) {
         let el = document.getElementById("list")
-        if (Number(this.currentPage) > 3 && Number(this.currentPage) < this.countPage) {
+        if (this.currentPage > 3 && this.currentPage < this.countPage) {
           el.style.counterIncrement = `myCounter ${this.currentPage - 4}`
         }
         this.changePage(this.currentPage - 1)
       }
     },
     nextPage() {
-      if (Number(this.currentPage - 1) !== this.countPage) {
-        if (Number(this.currentPage) >= 3 && Number(this.currentPage) < this.countPage - 1) {
+      if (this.currentPage - 1 !== this.countPage) {
+        if (this.currentPage >= 3 && this.currentPage < this.countPage - 1) {
           let el = document.getElementById("list")
           el.style.counterIncrement = `myCounter ${this.currentPage - 2}`
         }
-        this.changePage(Number(this.currentPage) + 1)
+        this.changePage(this.currentPage + 1)
       }
     }
   }
