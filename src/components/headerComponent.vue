@@ -6,10 +6,10 @@
     <div class="search">
       <input type="text" class="search-field" v-model="searchString">
       <img src="https://image.flaticon.com/icons/svg/49/49116.svg" alt="" class="search-icon">
-      <input type="button" class="search-button" value="Find" @click="$router.push('/search/' + searchString).catch(err => {$router.replace('/search/' + searchString)})">
+      <input type="button" class="search-button" value="Find" @click="searchNews">
     </div>
     <div class="auth" v-if="$store.getters.getName===''">
-      <input type="button" value="Sign In/Sign Up" @click="$router.push('/login').catch(err=>{})" class="authButton">
+      <input type="button" value="Sign In/Sign Up" @click="searchButton" class="authButton">
     </div>
     <div class="auth" v-else>
       <p class="login-text">{{ $store.getters.getName }}</p>
@@ -28,6 +28,21 @@ export default {
   methods: {
     logout() {
     this.$store.dispatch('logout')
+    },
+    searchNews(){
+      if(this.searchString!=='')
+      this.$router.push('/search/' + this.searchString).catch(() => {this.$router.replace('/search/' + this.searchString)})
+    else {
+      let el = document.getElementsByClassName('search-field')
+        el[0].classList.add('search-error')
+        el[0].setAttribute('placeholder','Введите слово')
+      }
+    },
+    searchButton(){
+      let el = document.getElementsByClassName('search-field')
+      el[0].classList.add('search-error')
+      el[0].setAttribute('placeholder','Введите слово')
+      this.$router.push('/login').catch(()=>{})
     }
   }
 }
@@ -88,6 +103,10 @@ export default {
   display: inline-block;
   margin-right: 40px;
   font-size: 26px;
+}
+.search-error{
+  color: #8d1818;
+  border: 1px solid #8d1818;
 }
 
 
