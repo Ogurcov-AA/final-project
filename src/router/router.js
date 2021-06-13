@@ -19,7 +19,7 @@ const routes = [
         }
     },
     {
-        path: '/login',
+        path: '/login/signin',
         name: 'signin',
         component: function () {
             return import('../views/SignIn.vue')
@@ -33,7 +33,7 @@ const routes = [
         }
     },
     {
-        path: '/signup',
+        path: '/login/signup',
         name: 'signup',
         component: function () {
             return import('../views/SingUp.vue')

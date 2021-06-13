@@ -39,10 +39,7 @@ export default {
       }
     },
     searchButton(){
-      let el = document.getElementsByClassName('search-field')
-      el[0].classList.add('search-error')
-      el[0].setAttribute('placeholder','Введите слово')
-      this.$router.push('/login').catch(()=>{})
+      this.$router.push('/login/signin').catch(()=>{})
     }
   }
 }

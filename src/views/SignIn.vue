@@ -6,7 +6,7 @@
       <input type="password" v-model="password" placeholder="Password" required>
       <div class="buttMenu">
         <input type="submit" class="butt" value="Sign">
-        <input type="button" class="butt" value="Registration">
+        <input type="button" class="butt" value="Registration" @click="$router.push('/login/signup')">
       </div>
     </form>
   </div>
