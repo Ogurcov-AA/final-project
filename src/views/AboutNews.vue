@@ -19,7 +19,7 @@
         <textarea class="changed-description-info" v-else v-model="bufferNews.description"></textarea>
 
       </div>
-      <div>
+      <div style="display: inline-block">
         <p v-if="!changeMod">{{ currentNews.content }}</p>
         <textarea class="changed-content-info" v-else v-model="bufferNews.content"></textarea>
 
@@ -115,7 +115,7 @@ export default {
   display: inline-block;
   float: right;
   margin-right: 15%;
-  width: 45%;
+  width: 50%;
   text-align: center;
 }
 
