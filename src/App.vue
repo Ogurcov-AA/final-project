@@ -1,9 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="isFetching">
     <HeaderElem/>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <router-view/>
   </div>
 </template>
 
@@ -15,7 +13,18 @@ export default {
   name: 'App',
   components: {
     HeaderElem,
+  }, data() {
+    return {isFetching: false}
   },
+  created() {
+    this.getList()
+  },
+  methods: {
+    getList() {
+      this.$store.dispatch('getNews')
+          .then(() => this.isFetching = true)
+    },
+  }
 }
 </script>
 
