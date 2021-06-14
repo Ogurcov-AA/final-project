@@ -1,0 +1,44 @@
+{
+  "Comment": [
+    {
+      "newsId": "0",
+      "comments": [
+        {
+          "id": "0",
+          "message": "test",
+          "author": "test"
+        },
+        {
+          "id": "1",
+          "message": "test1",
+          "author": "test"
+        },
+        {
+          "id": "2",
+          "message": "test1",
+          "author": "test"
+        }
+      ]
+    },
+    {
+      "newsId": "1",
+      "comments": [
+        {
+          "id": "0",
+          "message": "test1",
+          "author": "test"
+        }
+      ]
+    },
+    {
+      "newsId": "2",
+      "comments": [
+        {
+          "id": "0",
+          "message": "test3",
+          "author": "test"
+        }
+      ]
+    }
+  ]
+}

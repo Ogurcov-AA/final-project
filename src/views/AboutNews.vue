@@ -43,7 +43,7 @@
              alt="" class="delete-icon" @click="changeModActive">
         <button v-if="changeMod" @click="saveChange">Save</button>
       </div>
-      <commentsFrame/>
+      <commentsFrame v-bind:newsId="currentNews.source.id"/>
     </div>
 
   </div>
@@ -59,7 +59,8 @@ export default {
       isFetching: false,
       currentNews: '',
       bufferNews: '',
-      changeMod: false
+      changeMod: false,
+      comments: []
     }
   },
   components: {
@@ -91,7 +92,7 @@ export default {
     },
     saveChange() {
       this.currentNews = this.bufferNews
-      this.$store.dispatch('editNews',this.currentNews).then((r)=>console.log(r))
+      this.$store.dispatch('editNews', this.currentNews).then((r) => console.log(r))
     }
   }
 }

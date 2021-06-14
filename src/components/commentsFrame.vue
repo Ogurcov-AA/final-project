@@ -3,19 +3,19 @@
     <h1>Comments</h1>
     <div class="comment-frame" v-if="$store.getters.isAuth">
       <form action="" class="newComment" v-if="!$store.getters.isAdmin">
-        <input type="text" placeholder="Add new comment">
-        <input type="button" value="Add">
+        <input type="text" placeholder="Add new comment" v-model="message">
+        <input type="button" value="Add" @click="addNewComment">
       </form>
-
-      <comment v-bind:name="'Sasha Ogur'"
-               v-bind:comments="'good news'"/>
-
-      <comment v-bind:name="'Sasha Ogur'"
-               v-bind:comments="'good news'"/>
-
-      <comment v-bind:name="'Sasha Ogur'"
-               v-bind:comments="'good news'"/>
-
+      <div v-if="isFetching">
+        <p v-if="comments.length===0">Write the first comment</p>
+        <div v-for="item in comments" :key="item.id">
+          <comment v-bind:name="item.author"
+                   v-bind:comments="item.message"/>
+        </div>
+      </div>
+      <div v-else>
+        <loading/>
+      </div>
     </div>
     <div v-else>
       <p>You can't see or add comments. Please Sign In or Sign up</p>
@@ -25,11 +25,40 @@
 
 <script>
 import comment from "@/components/comment";
+import loading from "@/components/loading";
 
 export default {
   name: "commentsFrame",
   components: {
-    comment
+    comment,
+    loading
+  },
+  data() {
+    return {
+      message: '',
+      comments: [],
+      isFetching: false
+    }
+  },
+  props: ["newsId"],
+  created() {
+    this.getList()
+  },
+  methods: {
+    addNewComment() {
+      let newsId = this.newsId
+      let name = this.$store.getters.getName + " " + this.$store.getters.getSurName
+      let message = this.message
+      this.$store.dispatch('addComment', {newsId, author: name, message}).then(()=>{
+        this.getList()
+      })
+    },
+    getList() {
+      this.$store.dispatch('getCommentList', this.newsId).then(() => {
+        this.comments = this.$store.getters.getComment
+        this.isFetching = true
+      })
+    }
   }
 }
 </script>
