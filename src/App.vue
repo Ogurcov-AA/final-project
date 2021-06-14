@@ -19,7 +19,8 @@ export default {
   components: {
     HeaderElem,
     loading
-  }, data() {
+  },
+  data() {
     return {isFetching: false}
   },
   created() {

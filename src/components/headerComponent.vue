@@ -28,6 +28,8 @@ export default {
   methods: {
     logout() {
     this.$store.dispatch('logout')
+      if(this.$route.path==="/admin/createnews")
+        this.$router.push('/error/404')
     },
     searchNews(){
       if(this.searchString!=='')
