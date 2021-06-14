@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form @submit.prevent="addNews" class="createNews">
+    <form name="addNewsForm" @submit.prevent="addNews" class="createNews">
       <input type="text" placeholder="author" minlength="6" v-model="author" required>
-      <input type="text" placeholder="title" minlength="6" v-model="title" required>
+      <input type="text" placeholder="title" minlength="6" maxlength="100" v-model="title" required>
       <input type="text" placeholder="description" minlength="6" v-model="description" required>
       <input type="text" placeholder="urlToImage" minlength="6" v-model="urlToImage" required>
-      <input type="datetime-local" placeholder="publishedAt" v-model="publishedAt" required>
+      <input type="date" placeholder="publishedAt" v-model="publishedAt" required>
       <textarea cols="30" rows="5" placeholder="content" minlength="6" v-model="content" required
                 style="margin-bottom: 10%"></textarea>
       <div class="buttMenu">
@@ -37,7 +37,8 @@ export default {
       let urlToImage = this.urlToImage
       let publishedAt = this.publishedAt
       let content = this.content
-      this.$store.dispatch('addNews', {author,title,description,urlToImage,publishedAt,content})
+      this.$store.dispatch('addNews', {author, title, description, urlToImage, publishedAt, content})
+      document.addNewsForm.reset()
     }
   }
 }
