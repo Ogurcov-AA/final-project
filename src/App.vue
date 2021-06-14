@@ -1,18 +1,24 @@
 <template>
-  <div id="app" v-if="isFetching">
+  <div id="app">
     <HeaderElem/>
-    <router-view/>
+    <div v-if="isFetching">
+      <router-view/>
+    </div>
+    <div v-else>
+      <loading/>
+    </div>
   </div>
 </template>
 
 <script>
 import HeaderElem from "@/components/headerComponent";
-
+import loading from "@/components/loading";
 
 export default {
   name: 'App',
   components: {
     HeaderElem,
+    loading
   }, data() {
     return {isFetching: false}
   },
