@@ -52,6 +52,7 @@ export default {
   },
   beforeRouteUpdate(to, from, next){
     this.pagination = to.params.page
+    this.newsList = this.$store.getters.getNewsList
     next()
   },
   computed: {
@@ -74,12 +75,9 @@ export default {
   },
   methods: {
     getList() {
-      this.$store.dispatch('getNews')
-          .then(resp => {
-            this.newsList = resp
+            this.newsList = this.$store.getters.getNewsList
             this.newsPage = this.getPage
             this.isFetching = true
-          })
     },
     authorNews(news){
       return news.author?news.author:news.source.name

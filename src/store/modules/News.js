@@ -23,11 +23,18 @@ const news = {
             if (index !== -1)
                 state.newsList.splice(index, 1)
         },
-        newNews(state,news){
-            news.source = {name: news.author, id: state.newsList[state.newsList.length-1].source.id+1}
+        newNews(state, news) {
+            news.source = {name: news.author, id: state.newsList[state.newsList.length - 1].source.id + 1}
             console.log(news)
             state.newsList.unshift({...news})
             console.log(state.newsList)
+        },
+        edNews(state, news) {
+            for (let i = 0; i < state.newsList.length; i++) {
+                if (state.newsList[i].source.id === news.source.id) {
+                    state.newsList[i] = news
+                }
+            }
         }
     },
     actions: {
@@ -57,8 +64,13 @@ const news = {
         },
         addNews({commit}, news) {
             return new Promise((resolve) => {
-                console.log(news)
                 commit('newNews', news)
+                resolve('ok')
+            })
+        },
+        editNews({commit}, news) {
+            return new Promise((resolve) => {
+                commit('edNews', news)
                 resolve('ok')
             })
         }
