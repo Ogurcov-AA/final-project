@@ -4,7 +4,7 @@
          class="news-icon">
     <div class="news-info">
       <h4>{{ title }}</h4>
-      <p>{{ description }}</p>
+      <p>{{ restrictionStr }}</p>
       <h5><span>{{ author }}</span>{{ publishedAt }}</h5>
     </div>
     <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png"
@@ -20,6 +20,13 @@ export default {
     deleteNews() {
       event.stopPropagation()
       this.$store.dispatch('removeNews', this.id).then(() => console.log(this.$store.getters.getNewsList))
+    }
+  },
+  computed: {
+    restrictionStr(){
+      if(this.description.length>300){
+        return this.description.slice(0,300) + "..."
+      }else return this.description
     }
   }
 }
