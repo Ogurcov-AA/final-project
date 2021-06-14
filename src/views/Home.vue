@@ -17,7 +17,7 @@
       </div>
       <div class="addNews" v-else>
         <img src="https://img.icons8.com/pastel-glyph/2x/plus.png" alt="" class="addNews-icon"
-             @click="$router.push('/createnews')">
+             @click="$router.push('/admin/createnews')">
       </div>
     </div>
     <div class="nextPages">
@@ -51,7 +51,6 @@ export default {
     this.getList()
   },
   beforeRouteUpdate(to, from, next){
-    console.log(this.pagination)
     this.pagination = to.params.page
     next()
   },
@@ -61,8 +60,9 @@ export default {
         return this.newsList
       }
       else {
-        if(this.pagination === 1)
-        return this.newsList.slice(0,this.countNewsInPage)
+        if(Number(this.pagination) === 1) {
+          return this.newsList.slice(0, this.countNewsInPage)
+        }
         else {
           return this.newsList.slice((this.pagination-1)*this.countNewsInPage+1,this.pagination*this.countNewsInPage)
         }
