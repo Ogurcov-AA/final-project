@@ -10,7 +10,9 @@
         <p v-if="comments.length===0">Write the first comment</p>
         <div v-for="item in comments" :key="item.id">
           <comment v-bind:name="item.author"
-                   v-bind:comments="item.message"/>
+                   v-bind:comments="item.message"
+                   v-bind:id="item.id"
+                    @update="getList"/>
         </div>
       </div>
       <div v-else>
@@ -49,7 +51,7 @@ export default {
       let newsId = this.newsId
       let name = this.$store.getters.getName + " " + this.$store.getters.getSurName
       let message = this.message
-      this.$store.dispatch('addComment', {newsId, author: name, message}).then(()=>{
+      this.$store.dispatch('addComment', {newsId, author: name, message}).then(() => {
         this.getList()
       })
     },

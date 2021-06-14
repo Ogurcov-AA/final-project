@@ -1,8 +1,7 @@
-import List from '@/helper/comment.json'
 
 const comment = {
     state: {
-        commentList: List.Comment,
+        commentList: [],
         currentNews: '',
         comments: []
     },
@@ -40,7 +39,17 @@ const comment = {
                     comments
                 })
             }
-        }
+        },
+        delComm(state, comID) {
+            for (let i = 0; i < state.commentList.length; i++) {
+                if (Number(state.commentList[i].newsId) === Number(state.currentNews)) {
+                    state.commentList[i].comments.forEach((item,index) => {
+                        if(item.id === comID)
+                            state.commentList[i].comments.splice(index,1)
+                    })
+                }
+            }
+        },
     },
     actions: {
         getCommentList({commit}, newsId) {
@@ -53,6 +62,12 @@ const comment = {
             ({commit}, commentData) {
             return new Promise((resolve) => {
                 commit('addComm', commentData)
+                resolve('ok')
+            })
+        },
+        deleteComment({commit},id){
+            return new Promise((resolve) => {
+                commit('delComm', id)
                 resolve('ok')
             })
         }

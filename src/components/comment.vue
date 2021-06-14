@@ -2,7 +2,8 @@
   <div>
     <div class="container">
       <h3><span>{{name}}</span>
-        <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png" alt="" class="delete-icon">
+        <img id="deleteNews" v-if="$store.getters.isAdmin" src="https://image.flaticon.com/icons/png/512/1483/1483063.png" alt=""
+             class="delete-icon" @click="deleteComment">
       </h3>
          <p>{{comments}}</p>
      </div>
@@ -12,7 +13,14 @@
 <script>
 export default {
   name: "comment",
-  props: ["name","comments"]
+  props: ["name","comments","id"],
+  methods: {
+    deleteComment(){
+      this.$store.dispatch('deleteComment',this.id)
+      this.$destroy()
+      this.$el.parentNode.removeChild(this.$el);
+    }
+  }
 }
 </script>
 
