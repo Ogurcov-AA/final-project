@@ -3,7 +3,8 @@ import axios from 'axios'
 const news = {
     state: {
         newsList: [],
-        searchNewsList: ''
+        searchNewsList: '',
+        lastIndex: 0
     },
     mutations: {
         setNewsList(state, data) {
@@ -21,6 +22,12 @@ const news = {
             console.log(index)
             if (index !== -1)
                 state.newsList.splice(index, 1)
+        },
+        newNews(state,news){
+            news.source = {name: news.author, id: state.newsList[state.newsList.length-1].source.id+1}
+            console.log(news)
+            state.newsList.unshift({...news})
+            console.log(state.newsList)
         }
     },
     actions: {
@@ -46,6 +53,13 @@ const news = {
                 commit('delNews', newsID)
                 resolve('ok')
 
+            })
+        },
+        addNews({commit}, news) {
+            return new Promise((resolve) => {
+                console.log(news)
+                commit('newNews', news)
+                resolve('ok')
             })
         }
     },

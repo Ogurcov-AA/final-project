@@ -40,7 +40,7 @@ const routes = [
         }
     },
     {
-        path: '/createNews',
+        path: '/admin/createNews',
         name: 'new news',
         component: function () {
             return import('../views/addNews.vue')
