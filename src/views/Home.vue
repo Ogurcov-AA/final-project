@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import news from "../components/news.vue"
-import randomNews from "../components/randomNews.vue";
-import pagination from "../components/pagination.vue";
+import news from "@/components/news"
+import randomNews from "@/components/randomNews";
+import pagination from "@/components/pagination";
 
 export default {
   name: "Home",
