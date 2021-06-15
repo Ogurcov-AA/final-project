@@ -4,7 +4,8 @@ const news = {
     state: {
         newsList: [],
         searchNewsList: '',
-        lastIndex: 0
+        lastIndex: 0,
+        countNewsInPage: 15,
     },
     mutations: {
         setNewsList(state, data) {
@@ -76,7 +77,8 @@ const news = {
         }
     },
     getters: {
-        getNewsList: state => state.newsList
+        getNewsList: state => state.newsList,
+        getCountNewsInPage: state=>state.countNewsInPage,
     }
 }
 

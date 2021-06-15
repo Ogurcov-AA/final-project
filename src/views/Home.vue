@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="randomNews" v-if="!$store.getters.isAdmin">
-        <randomNews />
+        <randomNews/>
       </div>
       <div class="addNews" v-else>
         <img src="https://img.icons8.com/pastel-glyph/2x/plus.png" alt="" class="addNews-icon"
@@ -42,15 +42,18 @@ export default {
     return {
       newsList: this.$store.getters.getNewsList,
       isFetching: false,
-      countNewsInPage: 15,
       newsPage: '',
+      countNewsInPage: this.$store.getters.getCountNewsInPage,
       pagination: this.$route.params.page,
     }
   },
   created() {
     this.getList()
   },
-  beforeRouteUpdate(to, from, next){
+  beforeRouteEnter(to, from, next){
+    next(vm => {vm.redirect(to.params.page)})
+  },
+  beforeRouteUpdate(to, from, next) {
     this.pagination = to.params.page
     this.newsList = this.$store.getters.getNewsList
     next()
@@ -59,32 +62,34 @@ export default {
     getPage() {
       if (this.newsList.length < 15) {
         return this.newsList
-      }
-      else {
-        if(Number(this.pagination) === 1) {
+      } else {
+        if (Number(this.pagination) === 1) {
           return this.newsList.slice(0, this.countNewsInPage)
-        }
-        else {
-          return this.newsList.slice((this.pagination-1)*this.countNewsInPage+1,this.pagination*this.countNewsInPage)
+        } else {
+          return this.newsList.slice((this.pagination - 1) * this.countNewsInPage + 1, this.pagination * this.countNewsInPage)
         }
       }
     },
-    countPage(){
-      return this.newsList.length/this.countNewsInPage
+    countPage() {
+      return this.newsList.length / this.countNewsInPage
     }
   },
   methods: {
     getList() {
-            this.newsList = this.$store.getters.getNewsList
-            this.newsPage = this.getPage
-            this.isFetching = true
+      this.newsList = this.$store.getters.getNewsList
+      this.newsPage = this.getPage
+      this.isFetching = true
     },
-    authorNews(news){
-      return news.author?news.author:news.source.name
+    authorNews(news) {
+      return news.author ? news.author : news.source.name
     },
-    formatDate(date){
+    formatDate(date) {
       return new Date(date).toLocaleDateString()
     },
+    redirect(page){
+      if(Number(this.countPage)+1<page)
+        this.$router.replace('error/404')
+    }
   }
 }
 </script>
