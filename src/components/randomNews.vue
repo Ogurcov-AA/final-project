@@ -5,7 +5,8 @@
           v-bind:url="randNews.urlToImage"
           v-bind:author="authorNews(randNews)"
           v-bind:publishedAt="formatDate(randNews.publishedAt)"
-          @click.native="$router.push({name: 'news', params: {id: randNews.source.name}})"/>
+          v-bind:id="randNews.source.id"
+          @click.native="$router.push({name: 'news', params: {id: randNews.source.id}})"/>
   </div>
 </template>
 
