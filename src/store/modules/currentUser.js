@@ -27,13 +27,27 @@ const user = {
                             commit('auth_user', userInfo.User[i])
                             sessionStorage.setItem("userInfo", JSON.stringify(userInfo.User[i]))
                             resolve('ok')
-                        }
-                        else reject("password")
+                        } else reject("password")
                     }
                 }
                 reject("email")
             })
+        },
+        register({commit}, regUser) {
+            return new Promise((resolve, reject) => {
+                console.log(regUser)
+                for (let i = 0; i < userInfo.User.length; i++) {
+                    console.log(userInfo.User[i].email, regUser.email)
+                    if (userInfo.User[i].email === regUser.email) {
+                        reject("email")
+                        return;
+                    }
 
+                }
+                commit('auth_user', regUser)
+                sessionStorage.setItem("userInfo", JSON.stringify(regUser))
+                resolve('ok')
+            })
         },
         logout({commit}) {
             commit('logout_user')
