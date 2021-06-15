@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import commentsFrame from "@/components/commentsFrame";
+import commentsFrame from "../components/commentsFrame.vue";
 
 export default {
   name: "AboutNews",

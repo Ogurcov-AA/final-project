@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './modules/currentUser'
-import news from './modules/News'
-import comments from "@/store/modules/comments";
+import user from './modules/currentUser.js'
+import news from './modules/News.js'
+import comments from "../store/modules/comments.js";
 
 Vue.use(Vuex)
 

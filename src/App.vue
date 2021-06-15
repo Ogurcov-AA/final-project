@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import HeaderElem from "@/components/headerComponent";
-import loading from "@/components/loading";
+import HeaderElem from "./components/headerComponent.vue";
+import loading from "./components/loading.vue";
 
 export default {
   name: 'App',

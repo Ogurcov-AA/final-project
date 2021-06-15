@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import news from "@/components/news";
+import news from "../components/news.vue";
 
 export default {
   name: "SearchNews",
