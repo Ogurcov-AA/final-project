@@ -22,6 +22,11 @@ const routes = [
     {
         path: '/login/signin',
         name: 'signin',
+        beforeEnter: (to, from, next) => {
+            console.log(to.path,store.getters.isAuth)
+            if (to.path === "/login/signin" && store.getters.isAuth) next('/')
+            else next()
+        },
         component: function () {
             return import('../views/SignIn.vue')
         }
@@ -36,9 +41,14 @@ const routes = [
     {
         path: '/login/signup',
         name: 'signup',
+        beforeEnter: (to, from, next) => {
+            console.log(to.path,store.getters.isAuth)
+            if (to.path === "/login/signup" && store.getters.isAuth) next('/')
+            else next()
+        },
         component: function () {
             return import('../views/SingUp.vue')
-        }
+        },
     },
     {
         path: '/error/404',
