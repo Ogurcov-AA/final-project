@@ -43,16 +43,16 @@ export default {
       let elem = document.querySelectorAll('li')
       if (this.countPage > 5) {
         if (this.currentPage <= 3 && newPage <= 3) {
-          elem[this.currentPage - 1].classList.remove('li-chosen')
-          elem[newPage - 1].classList.add('li-chosen')
+          elem[this.currentPage - 1]?.classList.remove('li-chosen')
+          elem[newPage - 1]?.classList.add('li-chosen')
         }
         if (this.countPage + 1 - this.currentPage < 3 && this.countPag + 1 - newPage < 3) {
-          elem[4 - this.countPage + 1 - this.currentPage].classList.remove('li-chosen')
-          elem[4 - (this.countPage + 1 - newPage)].classList.add('li-chosen')
+          elem[4 - this.countPage + 1 - this.currentPage]?.classList.remove('li-chosen')
+          elem[4 - (this.countPage + 1 - newPage)]?.classList.add('li-chosen')
         }
       } else {
-        elem[this.currentPage - 1].classList.remove('li-chosen')
-        elem[newPage - 1].classList.add('li-chosen')
+        elem[this.currentPage - 1]?.classList.remove('li-chosen')
+        elem[newPage - 1]?.classList.add('li-chosen')
       }
       this.currentPage = newPage
       this.$router.push("/" + newPage).catch(err => {
@@ -66,14 +66,14 @@ export default {
         let el = document.getElementById("list")
         if (this.countPage + 1 - this.currentPage <= 2) {
           el.style.counterIncrement = `myCounter ${this.currentPage - 5}`
-          elem[4 - (this.countPage + 1 - this.currentPage)].classList.add('li-chosen')
+          elem[4 - (this.countPage + 1 - this.currentPage)]?.classList.add('li-chosen')
         } else {
 
           el.style.counterIncrement = `myCounter ${this.currentPage - 3}`
-          elem[2].classList.add('li-chosen')
+          elem[2]?.classList.add('li-chosen')
         }
-      } else elem[this.currentPage - 1].classList.add('li-chosen')
-      elem[this.currentPage - 1].classList.add('li-chosen')
+      } else elem[this.currentPage - 1]?.classList.add('li-chosen')
+      elem[this.currentPage - 1]?.classList.add('li-chosen')
     },
     prePage() {
       if (this.currentPage !== 1) {
