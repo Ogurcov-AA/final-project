@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     restrictionStr(){
-      if(this.description?.length>300){
+      if(this.description.length>300){
         return this.description.slice(0,300) + "..."
       }else return this.description
     }
@@ -40,7 +40,8 @@ export default {
 }
 
 .news-icon {
-  width: 50%;
+  max-width: 50%;
+  min-width: 40%;
   margin: 2%;
 }
 

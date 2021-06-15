@@ -1,23 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index.js'
-
+import Home from '../views/Home.vue'
+import SingUp from "../views/SingUp.vue";
+import SearchNews from "../views/SearchNews.vue";
+import SignIn from "../views/SignIn.vue";
+import AboutNews from "../views/AboutNews.vue";
+import NotFoundPage from '../views/NotFoundPage.vue'
+import addNews from "../views/addNews.vue";
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/:page',
         name: 'Home',
-        component: function () {
-            return import('../views/Home.vue')
-        }
+        component: Home
     },
     {
         path: '/search/:tittle',
         name: 'Search',
-        component: function () {
-            return import('../views/SearchNews.vue')
-        }
+        component: SearchNews
     },
     {
         path: '/login/signin',
@@ -27,16 +29,12 @@ const routes = [
             if (to.path === "/login/signin" && store.getters.isAuth) next('/')
             else next()
         },
-        component: function () {
-            return import('../views/SignIn.vue')
-        }
+        component: SignIn
     },
     {
         path: '/news/:id',
         name: 'news',
-        component: function () {
-            return import('../views/AboutNews.vue')
-        }
+        component: AboutNews
     },
     {
         path: '/login/signup',
@@ -46,16 +44,12 @@ const routes = [
             if (to.path === "/login/signup" && store.getters.isAuth) next('/')
             else next()
         },
-        component: function () {
-            return import('../views/SingUp.vue')
-        },
+        component: SingUp
     },
     {
         path: '/error/404',
         name: 'PageNotFound',
-        component: function () {
-            return import('../views/NotFoundPage.vue')
-        }
+        component: NotFoundPage
     },
     {
         path: '/admin/createNews',
@@ -65,9 +59,7 @@ const routes = [
             if (to.path === "/admin/createnews" && !store.getters.isAdmin) next('/error/404')
             else next()
         },
-        component: function () {
-            return import('../views/addNews.vue')
-        },
+        component: addNews
 
     },
     { path: '/', redirect: '/1' },

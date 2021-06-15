@@ -20,8 +20,11 @@
              @click="$router.push('/admin/createnews')">
       </div>
     </div>
-    <div class="nextPages">
-      <pagination v-bind:count="countPage"/>
+    <div class="nextPages" v-if="newsList.length>0">
+      <pagination  v-bind:count="countPage"/>
+    </div>
+    <div v-else class="notNews">
+      <h3>Not news</h3>
     </div>
   </div>
 </template>
@@ -102,7 +105,7 @@ export default {
 
 .newsTab {
   display: inline-block;
-  max-width: 60%;
+  width: 60%;
 }
 
 .randomNews {
@@ -125,6 +128,10 @@ export default {
 .addNews-icon:active {
   width: 30px;
   height: 30px;
+}
+.notNews{
+  margin: 2%;
+  text-align: center;
 }
 
 

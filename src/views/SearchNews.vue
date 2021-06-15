@@ -52,7 +52,7 @@ export default {
     },
     sortNews() {
       this.newsList.forEach(item => {
-        if ((item.title?.toLowerCase()?.indexOf(this.searchString?.toLowerCase())) > -1 || (item.description?.toLowerCase().indexOf(this.searchString?.toLowerCase())) > -1) {
+        if ((item.title.toLowerCase().indexOf(this.searchString.toLowerCase())) > -1 || (item.description.toLowerCase().indexOf(this.searchString.toLowerCase())) > -1) {
           this.sortedList.push(item)
         }
       })

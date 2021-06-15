@@ -25,7 +25,10 @@ const news = {
                 state.newsList.splice(index, 1)
         },
         newNews(state, news) {
+          if(state.newsList.length!==0)
             news.source = {name: news.author, id: state.newsList[state.newsList.length - 1].source.id + 1}
+          else
+          news.source = {name: news.author, id: 0}
             console.log(news)
             state.newsList.unshift({...news})
             console.log(state.newsList)

@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import HeaderElem from "./components/headerComponent.vue";
-import loading from "./components/loading.vue";
+import HeaderElem from './components/headerComponent.vue'
+import loading from './components/loading.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -29,8 +30,11 @@ export default {
   methods: {
     getList() {
       this.$store.dispatch('getNews')
-          .then(() => this.isFetching = true)
-          .catch(re=>alert(re))
+        .then(() => this.isFetching = true)
+        .catch((re) => {
+          alert(re)
+          this.isFetching = true
+        })
     },
   }
 }
