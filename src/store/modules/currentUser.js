@@ -1,3 +1,5 @@
+import userInfo from "@/helper/auth.json";
+
 const user = {
     state: {
         name: (JSON.parse(sessionStorage.getItem('userInfo')))?.name || '',
@@ -18,8 +20,20 @@ const user = {
     },
     actions: {
         setUser({commit}, user) {
-            commit('auth_user', user)
-            sessionStorage.setItem("userInfo", JSON.stringify(user))
+            return new Promise((resolve, reject) => {
+                for (let i = 0; i < userInfo.User.length; i++) {
+                    if (userInfo.User[i].email === user.email) {
+                        if (userInfo.User[i].password === user.password) {
+                            commit('auth_user', userInfo.User[i])
+                            sessionStorage.setItem("userInfo", JSON.stringify(userInfo.User[i]))
+                            resolve('ok')
+                        }
+                        else reject("password")
+                    }
+                }
+                reject("email")
+            })
+
         },
         logout({commit}) {
             commit('logout_user')
