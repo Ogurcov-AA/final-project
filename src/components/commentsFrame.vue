@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import comment from "./comment.vue";
-import loading from "./loading.vue";
+import comment from "@/components/comment";
+import loading from "@/components/loading";
 
 export default {
   name: "commentsFrame",

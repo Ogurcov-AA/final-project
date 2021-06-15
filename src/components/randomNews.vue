@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import news from "./news.vue";
+import news from "@/components/news";
 
 export default {
   name: "randomNews",

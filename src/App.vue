@@ -13,7 +13,6 @@
 <script>
 import HeaderElem from './components/headerComponent.vue'
 import loading from './components/loading.vue'
-import axios from 'axios'
 
 export default {
   name: 'App',
