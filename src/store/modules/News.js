@@ -39,20 +39,20 @@ const news = {
     },
     actions: {
         getNews({commit}) {
-            return new Promise((resolve) => axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=d072f63afae64577a8b7493df55cf7c3')
+            return new Promise((resolve, reject) => axios.get('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=d072f63afae64577a8b7493df55cf7c3')
                 .then(response => {
-                        let list = response.data.articles
-                        let i = 0
-                        Array.from(list).forEach(item => {
+                    let list = response.data.articles
+                    let i = 0
+                    Array.from(list).forEach(item => {
 
-                            item.source.id = i
-                            i++
-                        })
-                        console.log(list)
-                        commit('setNewsList', list)
-                        resolve(list)
-                    }
-                ))
+                        item.source.id = i
+                        i++
+                    })
+                    console.log(list)
+                    commit('setNewsList', list)
+                    resolve(list)
+                })
+                .catch(()=>reject("error getting data, try again later")))
         },
         removeNews({commit}, newsID) {
             return new Promise((resolve) => {
@@ -81,3 +81,4 @@ const news = {
 }
 
 export default news
+

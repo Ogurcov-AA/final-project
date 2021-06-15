@@ -30,6 +30,7 @@ export default {
     getList() {
       this.$store.dispatch('getNews')
           .then(() => this.isFetching = true)
+          .catch(re=>alert(re))
     },
   }
 }
