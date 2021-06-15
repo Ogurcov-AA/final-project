@@ -1,4 +1,4 @@
-import userInfo from "@/helper/auth.json";
+import userInfo from "../../helper/auth.json";
 
 const user = {
     state: {
